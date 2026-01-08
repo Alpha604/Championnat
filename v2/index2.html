@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue de Tournois - Swiss & Plus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-trophy"></i> Catalogue de Tournois</h1>
+        <p class="subtitle">Parcourez notre collection de tournois compétitifs. Cliquez sur une carte pour accéder aux détails et aux résultats en direct.</p>
+    </header>
+
+    <div class="container">
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Tous les tournois</button>
+            <button class="filter-btn" data-filter="swiss">Swiss</button>
+            <button class="filter-btn" data-filter="elimination">Élimination directe</button>
+            <button class="filter-btn" data-filter="roundrobin">Round Robin</button>
+        </div>
+
+        <div class="tournaments-grid" id="tournaments-container">
+            <!-- Les cartes de tournois seront générées dynamiquement -->
+        </div>
+    </div>
+
+    <!-- Modal pour l'iframe -->
+    <div class="modal-overlay" id="tournament-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-tournament-title">Tournoi Swiss OpenFront Championship 2026</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            
+            <div class="iframe-container">
+                <div class="loading" id="iframe-loading">
+                    <i class="fas fa-spinner"></i>
+                    <span>Chargement du tableau Challonge...</span>
+                </div>
+                <iframe id="tournament-iframe" class="challonge-iframe" title="Tournoi Challonge" 
+                        src="" 
+                        frameborder="0" 
+                        scrolling="auto" 
+                        allowtransparency="true"
+                        allowfullscreen></iframe>
+            </div>
+            
+            <div class="iframe-controls">
+                <div class="tournament-info-small">
+                    <span id="current-tournament-info">Chargement des informations...</span>
+                </div>
+                <div class="iframe-actions">
+                    <button class="iframe-btn" id="refresh-iframe">
+                        <i class="fas fa-sync-alt"></i> Actualiser
+                    </button>
+                    <button class="iframe-btn" id="open-new-tab">
+                        <i class="fas fa-external-link-alt"></i> Ouvrir dans un nouvel onglet
+                    </button>
+                    <button class="iframe-btn" id="view-participants-from-modal">
+                        <i class="fas fa-users"></i> Voir Participants
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Participants -->
+    <div class="participants-modal" id="participants-modal">
+        <div class="participants-content">
+            <div class="participants-header">
+                <h2 class="participants-title" id="participants-title">Participants du Tournoi</h2>
+                <button class="close-modal" id="close-participants">&times;</button>
+            </div>
+            <div class="participants-body" id="participants-body">
+                <!-- Contenu généré dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Catalogue de Tournois. Tous droits réservés.</p>
+        <div class="footer-links">
+            <a href="aide.html"><i class="fas fa-question-circle"></i> Aide</a>
+            <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="conditions.html"><i class="fas fa-shield-alt"></i> Conditions</a>
+            <a href="politique.html"><i class="fas fa-lock"></i> Confidentialité</a>
+            <a href="apropos.html"><i class="fas fa-info-circle"></i> À propos</a>
+        </div>
+    </footer>
+    
+<script src="../données.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

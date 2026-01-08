@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Catalogue de Tournois</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #1a1a2e;
+            color: #f1f1f1;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 4px solid #e94560;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #e94560, #4cc9f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #e94560;
+            transform: translateX(-5px);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex-grow: 1;
+        }
+
+        .contact-section {
+            background: rgba(34, 34, 58, 0.8);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #2a2b44;
+        }
+
+        h2 {
+            color: #4cc9f0;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            background: rgba(15, 52, 96, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #2a2b44;
+        }
+
+        .contact-info h3 {
+            color: #e94560;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            color: #b8c2cc;
+        }
+
+        .contact-form {
+            background: rgba(15, 52, 96, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #2a2b44;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #b8c2cc;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #2a2b44;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #4cc9f0;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, #e94560, #4cc9f0);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: #e94560;
+            transform: translateY(-5px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #0f172a;
+            color: #a9b7c6;
+            border-top: 1px solid #2a2b44;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #4cc9f0;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: #e94560;
+        }
+
+        @media (max-width: 768px) {
+            .back-btn {
+                position: relative;
+                left: 0;
+                top: 0;
+                margin-bottom: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="back-btn" onclick="window.history.back()">
+            <i class="fas fa-arrow-left"></i> Retour
+        </button>
+        <h1><i class="fas fa-envelope"></i> Contactez-nous</h1>
+        <p>Nous sommes là pour vous aider</p>
+    </header>
+
+    <div class="container">
+        <div class="contact-section">
+            <h2>Envoyez-nous un message</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3><i class="fas fa-info-circle"></i> Informations de contact</h3>
+                    <p><strong><i class="fas fa-map-marker-alt"></i> Adresse :</strong> 123 Rue des Tournois, 75000 Paris</p>
+                    <p><strong><i class="fas fa-phone"></i> Téléphone :</strong> +33 1 23 45 67 89</p>
+                    <p><strong><i class="fas fa-envelope"></i> Email :</strong> contact@tournois-catalogue.fr</p>
+                    <p><strong><i class="fas fa-clock"></i> Horaires :</strong> Lundi - Vendredi, 9h - 18h</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name"><i class="fas fa-user"></i> Nom complet</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Adresse email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject"><i class="fas fa-tag"></i> Sujet</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Sélectionnez un sujet</option>
+                                <option value="support">Support technique</option>
+                                <option value="tournament">Organisation de tournoi</option>
+                                <option value="partnership">Partenariat</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message"><i class="fas fa-comment"></i> Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Envoyer le message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Catalogue de Tournois. Tous droits réservés.</p>
+        <div class="footer-links">
+            <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+            <a href="aide.html"><i class="fas fa-question-circle"></i> Aide</a>
+            <a href="conditions.html"><i class="fas fa-shield-alt"></i> Conditions</a>
+            <a href="politique.html"><i class="fas fa-lock"></i> Confidentialité</a>
+            <a href="apropos.html"><i class="fas fa-info-circle"></i> À propos</a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupérer les valeurs du formulaire
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Simulation d'envoi
+            alert(`Merci ${name} ! Votre message a été envoyé avec succès. Nous vous répondrons à ${email} sous 24h.`);
+            
+            // Réinitialiser le formulaire
+            this.reset();
+        });
+    </script>
+</body>
+</html>

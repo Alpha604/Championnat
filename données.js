@@ -15,12 +15,12 @@ const tournamentsData = {
             iframeUrl: "https://challonge.com/fr/4tnu9k5t/module",
             tournamentUrl: "https://challonge.com/fr/4tnu9k5t",
             participantsList: [
-                { id: "#", name: "Victor", rank: "Participant", country: "", score: "0 pts" },
-                { id: "#", name: "Gaspard", rank: "Participant", country: "", score: "0 pts" },
-                { id: 1, name: "Roméo", rank: "Alpha", country: "🇦🇱", score: "🇦🇱 0 pts" },
-                { id: "#", name: "Kylian", rank: "Participant", country: "", score: "0 pts" },
-                { id: "#", name: "Basile", rank: "Participant", country: "", score: "0 pts" },
-                { id: "#", name: "Esteban", rank: "Participant", country: "", score: "0 pts" }
+                { id: "#", name: "Victor", rank: "Pas de Team", country: "", score: "0 pts" },
+                { id: "#", name: "Gaspard", rank: "Pas de Team", country: "", score: "0 pts" },
+                { id: 1, name: "Roméo", rank: "Team Alpha", country: "🇦🇱", score: "🇦🇱 0 pts" },
+                { id: "#", name: "Kylian", rank: "Pas de Team", country: "", score: "0 pts" },
+                { id: "#", name: "Basile", rank: "Pas de Team", country: "", score: "0 pts" },
+                { id: "#", name: "Esteban", rank: "Pas de Team", country: "", score: "0 pts" }
             ],
             description: "Tournoi OpenFront officiel 2026. Format simple élimination avec 8 participants en équipe de 2. Les matchs se dérouleront en ligne avec diffusion en direct."
         },

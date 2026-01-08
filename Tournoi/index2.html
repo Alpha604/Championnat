@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue de Tournois - Swiss & Plus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #1a1a2e;
+            color: #f1f1f1;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-bottom: 4px solid #e94560;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #e94560, #4cc9f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a9b7c6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background-color: #2d3047;
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover {
+            background-color: #e94560;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background-color: #e94560;
+            box-shadow: 0 4px 8px rgba(233, 69, 96, 0.4);
+        }
+
+        .tournaments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tournament-card {
+            background: linear-gradient(145deg, #22223a 0%, #1c1e32 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #2a2b44;
+        }
+
+        .tournament-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #e94560;
+        }
+
+        .tournament-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #2a2b44;
+            background-color: rgba(15, 52, 96, 0.3);
+            position: relative;
+        }
+
+        .tournament-type {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background-color: #0f3460;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #4cc9f0;
+        }
+
+        .tournament-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .tournament-game {
+            color: #a9b7c6;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .tournament-details {
+            padding: 1.5rem;
+        }
+
+        .tournament-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #b8c2cc;
+        }
+
+        .tournament-info i {
+            width: 24px;
+            color: #4cc9f0;
+            margin-right: 0.8rem;
+        }
+
+        .tournament-participants {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1.2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #2a2b44;
+        }
+
+        .participants-count {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .participants-count:hover {
+            color: #e94560;
+        }
+
+        .participants-count i {
+            color: #e94560;
+            margin-right: 0.5rem;
+        }
+
+        .tournament-status {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-en-attente {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .status-ongoing {
+            background-color: rgba(233, 69, 96, 0.2);
+            color: #e94560;
+        }
+
+        .status-completed {
+            background-color: rgba(42, 157, 143, 0.2);
+            color: #2a9d8f;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #2a2b44;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .view-participants-btn {
+            background-color: rgba(76, 201, 240, 0.2);
+            color: #4cc9f0;
+        }
+
+        .view-participants-btn:hover {
+            background-color: rgba(76, 201, 240, 0.4);
+        }
+
+        .view-site-btn {
+            background-color: rgba(42, 157, 143, 0.2);
+            color: #2a9d8f;
+        }
+
+        .view-site-btn:hover {
+            background-color: rgba(42, 157, 143, 0.4);
+        }
+
+        /* Modal pour l'iframe */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background-color: #f8f9fa; /* Fond clair pour mieux voir Challonge */
+            border-radius: 12px;
+            width: 95%;
+            max-width: 1400px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            border: 3px solid #4cc9f0;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #4cc9f0;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            color: #e94560;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .iframe-container {
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+            background-color: #ffffff; /* Fond blanc pour Challonge */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: brightness(1.1) contrast(1.05) saturate(1.1); /* Amélioration de luminosité et contraste */
+        }
+
+        /* Styles spécifiques pour Challonge iframe */
+        .challonge-iframe {
+            background-color: #ffffff !important;
+        }
+
+        .loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+            color: #0f3460;
+            font-size: 1.2rem;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .loading i {
+            margin-right: 0.8rem;
+            animation: spin 1s linear infinite;
+            font-size: 2rem;
+            color: #e94560;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Contrôles iframe */
+        .iframe-controls {
+            padding: 1rem;
+            background-color: #0f3460;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #2a2b44;
+        }
+
+        .iframe-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .iframe-btn {
+            padding: 0.5rem 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid #4cc9f0;
+            border-radius: 6px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .iframe-btn:hover {
+            background-color: #4cc9f0;
+            color: #0f3460;
+        }
+
+        /* Modal Participants */
+        .participants-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1100;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .participants-content {
+            background-color: #22223a;
+            border-radius: 12px;
+            width: 95%;
+            max-width: 800px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            border: 3px solid #e94560;
+        }
+
+        .participants-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #e94560 0%, #b62e46 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .participants-title {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .participants-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .participants-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .participant-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #4cc9f0;
+            transition: transform 0.3s;
+        }
+
+        .participant-item:hover {
+            transform: translateY(-3px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .participant-rank {
+            font-weight: bold;
+            color: #e94560;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .participant-name {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: #fff;
+        }
+
+        .participant-info {
+            color: #a9b7c6;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tournament-summary {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: rgba(15, 52, 96, 0.3);
+            border-radius: 8px;
+            border-left: 4px solid #e94560;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-label {
+            color: #a9b7c6;
+        }
+
+        .summary-value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #0f172a;
+            color: #a9b7c6;
+            margin-top: 2rem;
+            border-top: 1px solid #2a2b44;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #4cc9f0;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: #e94560;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .tournaments-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .modal-content {
+                height: 85vh;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .participants-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-actions {
+                flex-direction: column;
+            }
+            
+            .iframe-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .iframe-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 80%;
+            }
+            
+            .tournament-card {
+                max-width: 100%;
+            }
+            
+            .modal-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .modal-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animation d'entrée */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tournament-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-trophy"></i> Catalogue de Tournois</h1>
+        <p class="subtitle">Parcourez notre collection de tournois compétitifs. Cliquez sur une carte pour accéder aux détails et aux résultats en direct.</p>
+    </header>
+
+    <div class="container">
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Tous les tournois</button>
+            <button class="filter-btn" data-filter="swiss">Swiss</button>
+            <button class="filter-btn" data-filter="elimination">Élimination directe</button>
+            <button class="filter-btn" data-filter="roundrobin">Round Robin</button>
+        </div>
+
+        <div class="tournaments-grid" id="tournaments-container">
+            <!-- Les cartes de tournois seront générées dynamiquement -->
+        </div>
+    </div>
+
+    <!-- Modal pour l'iframe -->
+    <div class="modal-overlay" id="tournament-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-tournament-title">Tournoi Swiss OpenFront Championship 2026</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            
+            <div class="iframe-container">
+                <div class="loading" id="iframe-loading">
+                    <i class="fas fa-spinner"></i>
+                    <span>Chargement du tableau Challonge...</span>
+                </div>
+                <iframe id="tournament-iframe" class="challonge-iframe" title="Tournoi Challonge" 
+                        src="" 
+                        frameborder="0" 
+                        scrolling="auto" 
+                        allowtransparency="true"
+                        allowfullscreen></iframe>
+            </div>
+            
+            <div class="iframe-controls">
+                <div class="tournament-info-small">
+                    <span id="current-tournament-info">Chargement des informations...</span>
+                </div>
+                <div class="iframe-actions">
+                    <button class="iframe-btn" id="refresh-iframe">
+                        <i class="fas fa-sync-alt"></i> Actualiser
+                    </button>
+                    <button class="iframe-btn" id="open-new-tab">
+                        <i class="fas fa-external-link-alt"></i> Ouvrir dans un nouvel onglet
+                    </button>
+                    <button class="iframe-btn" id="view-participants-from-modal">
+                        <i class="fas fa-users"></i> Voir Participants
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Participants -->
+    <div class="participants-modal" id="participants-modal">
+        <div class="participants-content">
+            <div class="participants-header">
+                <h2 class="participants-title" id="participants-title">Participants du Tournoi</h2>
+                <button class="close-modal" id="close-participants">&times;</button>
+            </div>
+            <div class="participants-body" id="participants-body">
+                <!-- Contenu généré dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Catalogue de Tournois. Tous droits réservés.</p>
+        <div class="footer-links">
+            <a href="aide.html"><i class="fas fa-question-circle"></i> Aide</a>
+            <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="conditions.html"><i class="fas fa-shield-alt"></i> Conditions</a>
+            <a href="politique.html"><i class="fas fa-lock"></i> Confidentialité</a>
+            <a href="apropos.html"><i class="fas fa-info-circle"></i> À propos</a>
+        </div>
+    </footer>
+
+    <script>
+        // Données des tournois avec participants détaillés
+        const tournaments = [
+            {
+                id: 1,
+                title: "Swiss OpenFront Championship 2026",
+                type: "swiss",
+                game: "OpenFront",
+                date: "8 Janv 2026",
+                location: "Lille, France",
+                participants: 8,
+                status: "en-attente",
+                iframeUrl: "https://challonge.com/fr/4tnu9k5t/module",
+                tournamentUrl: "https://challonge.com/fr/4tnu9k5t",
+                participantsList: [
+                    { id: 1, name: "Victor", rank: "Participant", country: "🇫🇷", score: "0 pts" },
+                    { id: 2, name: "Gaspard", rank: "Participant", country: "🇫🇷", score: "0 pts" },
+                    { id: 3, name: "Roméo", rank: "Participant", country: "🇫🇷", score: "0 pts" },
+                    { id: 4, name: "Kylian", rank: "Participant", country: "🇫🇷", score: "0 pts" },
+                    { id: 5, name: "Basile", rank: "Participant", country: "🇫🇷", score: "0 pts" },
+                    { id: 6, name: "Esteban", rank: "Participant", country: "🇩🇪", score: "0 pts" }
+                ],
+                description: "Tournoi OpenFront officiel 2026. Format suisse avec 8 participants. Les matchs se dérouleront en ligne avec diffusion en direct."
+            }
+        ];
+
+        // Éléments DOM
+        const tournamentsContainer = document.getElementById('tournaments-container');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const modal = document.getElementById('tournament-modal');
+        const participantsModal = document.getElementById('participants-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const closeParticipantsBtn = document.getElementById('close-participants');
+        const tournamentIframe = document.getElementById('tournament-iframe');
+        const iframeLoading = document.getElementById('iframe-loading');
+        const modalTitle = document.getElementById('modal-tournament-title');
+        const participantsTitle = document.getElementById('participants-title');
+        const participantsBody = document.getElementById('participants-body');
+        const refreshIframeBtn = document.getElementById('refresh-iframe');
+        const openNewTabBtn = document.getElementById('open-new-tab');
+        const viewParticipantsFromModalBtn = document.getElementById('view-participants-from-modal');
+        const currentTournamentInfo = document.getElementById('current-tournament-info');
+        
+        let currentTournament = null;
+
+        // Générer les cartes de tournois
+        function renderTournaments(filter = 'all') {
+            tournamentsContainer.innerHTML = '';
+            
+            const filteredTournaments = filter === 'all' 
+                ? tournaments 
+                : tournaments.filter(tournament => tournament.type === filter);
+            
+            filteredTournaments.forEach((tournament, index) => {
+                const card = document.createElement('div');
+                card.className = 'tournament-card';
+                card.setAttribute('data-id', tournament.id);
+                card.setAttribute('data-type', tournament.type);
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                // Déterminer la classe de statut
+                let statusClass = '';
+                let statusText = '';
+                switch(tournament.status) {
+                    case 'en-attente': 
+                        statusClass = 'status-en-attente';
+                        statusText = 'En attente';
+                        break;
+                    case 'upcoming': 
+                        statusClass = 'status-upcoming';
+                        statusText = 'À venir';
+                        break;
+                    case 'ongoing': 
+                        statusClass = 'status-ongoing';
+                        statusText = 'En cours';
+                        break;
+                    case 'completed': 
+                        statusClass = 'status-completed';
+                        statusText = 'Terminé';
+                        break;
+                }
+                
+                card.innerHTML = `
+                    <div class="tournament-header">
+                        <span class="tournament-type">Tournoi ${getTypeName(tournament.type)}</span>
+                        <h3 class="tournament-title">${tournament.title}</h3>
+                        <p class="tournament-game">${tournament.game}</p>
+                    </div>
+                    <div class="tournament-details">
+                        <div class="tournament-info">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>${tournament.date}</span>
+                        </div>
+                        <div class="tournament-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${tournament.location}</span>
+                        </div>
+                        <div class="tournament-participants">
+                            <div class="participants-count" data-id="${tournament.id}">
+                                <i class="fas fa-users"></i>
+                                <span>${tournament.participants} participants</span>
+                            </div>
+                            <span class="tournament-status ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="action-btn view-participants-btn" data-id="${tournament.id}">
+                                <i class="fas fa-user-friends"></i> Participants
+                            </button>
+                            <button class="action-btn view-site-btn" data-id="${tournament.id}">
+                                <i class="fas fa-external-link-alt"></i> Site
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                // Ajouter l'événement de clic pour ouvrir le modal iframe (carte entière)
+                card.addEventListener('click', (e) => {
+                    // Ne pas ouvrir si on clique sur les boutons d'action
+                    if (!e.target.closest('.card-actions') && !e.target.closest('.participants-count')) {
+                        openTournamentModal(tournament);
+                    }
+                });
+                
+                tournamentsContainer.appendChild(card);
+            });
+            
+            // Ajouter les événements aux boutons
+            attachButtonEvents();
+        }
+
+        // Attacher les événements aux boutons
+        function attachButtonEvents() {
+            // Boutons "Voir Participants"
+            document.querySelectorAll('.view-participants-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const tournamentId = parseInt(btn.getAttribute('data-id'));
+                    const tournament = tournaments.find(t => t.id === tournamentId);
+                    if (tournament) {
+                        openParticipantsModal(tournament);
+                    }
+                });
+            });
+            
+            // Boutons "Site du Tournoi"
+            document.querySelectorAll('.view-site-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const tournamentId = parseInt(btn.getAttribute('data-id'));
+                    const tournament = tournaments.find(t => t.id === tournamentId);
+                    if (tournament && tournament.tournamentUrl) {
+                        window.open(tournament.tournamentUrl, '_blank', 'noopener,noreferrer');
+                    }
+                });
+            });
+            
+            // Boutons "Voir Participants" dans la section participants
+            document.querySelectorAll('.participants-count').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const tournamentId = parseInt(btn.getAttribute('data-id'));
+                    const tournament = tournaments.find(t => t.id === tournamentId);
+                    if (tournament) {
+                        openParticipantsModal(tournament);
+                    }
+                });
+            });
+        }
+
+        // Obtenir le nom du type de tournoi
+        function getTypeName(type) {
+            switch(type) {
+                case 'swiss': return 'Swiss';
+                case 'elimination': return 'Élimination';
+                case 'roundrobin': return 'Round Robin';
+                default: return type;
+            }
+        }
+
+        // Ouvrir le modal avec l'iframe Challonge
+        function openTournamentModal(tournament) {
+            currentTournament = tournament;
+            modalTitle.textContent = tournament.title;
+            currentTournamentInfo.textContent = `${tournament.game} • ${tournament.date} • ${tournament.participants} participants`;
+            
+            iframeLoading.style.display = 'flex';
+            tournamentIframe.style.display = 'none';
+            
+            // Afficher le modal
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Charger l'iframe Challonge
+            setTimeout(() => {
+                tournamentIframe.src = tournament.iframeUrl;
+                
+                // Quand l'iframe est chargée, cacher l'indicateur de chargement
+                tournamentIframe.onload = () => {
+                    setTimeout(() => {
+                        iframeLoading.style.display = 'none';
+                        tournamentIframe.style.display = 'block';
+                        
+                        // Appliquer un léger zoom pour améliorer la lisibilité
+                        tournamentIframe.style.transform = 'scale(1.02)';
+                        tournamentIframe.style.transformOrigin = 'top left';
+                    }, 500);
+                };
+                
+                // Gestion des erreurs de chargement
+                tournamentIframe.onerror = () => {
+                    iframeLoading.innerHTML = `
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Erreur de chargement du tournoi</span>
+                        <button class="iframe-btn" onclick="location.reload()" style="margin-top: 1rem;">
+                            <i class="fas fa-redo"></i> Réessayer
+                        </button>
+                    `;
+                };
+            }, 300);
+        }
+
+        // Ouvrir le modal des participants
+        function openParticipantsModal(tournament) {
+            participantsTitle.textContent = `Participants - ${tournament.title}`;
+            
+            // Générer le contenu des participants
+            let participantsHTML = '';
+            
+            // Résumé du tournoi
+            participantsHTML += `
+                <div class="tournament-summary">
+                    <h3 style="color: #4cc9f0; margin-bottom: 1rem;">${tournament.title}</h3>
+                    <p style="color: #b8c2cc; margin-bottom: 1rem;">${tournament.description || 'Aucune description disponible.'}</p>
+                    <div class="summary-item">
+                        <span class="summary-label">Format:</span>
+                        <span class="summary-value">${getTypeName(tournament.type)}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Date:</span>
+                        <span class="summary-value">${tournament.date}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Lieu:</span>
+                        <span class="summary-value">${tournament.location}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Participants:</span>
+                        <span class="summary-value">${tournament.participants}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Statut:</span>
+                        <span class="summary-value" style="color: ${getStatusColor(tournament.status)}">${getStatusText(tournament.status)}</span>
+                    </div>
+                </div>
+            `;
+            
+            if (tournament.participantsList && tournament.participantsList.length > 0) {
+                participantsHTML += '<div class="participants-list">';
+                tournament.participantsList.forEach((participant, index) => {
+                    participantsHTML += `
+                        <div class="participant-item">
+                            <div class="participant-rank">#${index + 1} - ${participant.rank}</div>
+                            <div class="participant-name">${participant.name} ${participant.country}</div>
+                            <div class="participant-info">
+                                <i class="fas fa-chart-line"></i>
+                                <span>${participant.score}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                participantsHTML += '</div>';
+            } else {
+                participantsHTML += `
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-user-slash" style="font-size: 3rem; color: #4cc9f0; margin-bottom: 1rem;"></i>
+                        <h3 style="color: #a9b7c6;">Liste des participants non disponible</h3>
+                        <p>Les participants seront annoncés prochainement.</p>
+                    </div>
+                `;
+            }
+            
+            participantsBody.innerHTML = participantsHTML;
+            
+            // Afficher le modal
+            participantsModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Obtenir la couleur du statut
+        function getStatusColor(status) {
+            switch(status) {
+                case 'en-attente': return '#ffc107';
+                case 'upcoming': return '#4cc9f0';
+                case 'ongoing': return '#e94560';
+                case 'completed': return '#2a9d8f';
+                default: return '#a9b7c6';
+            }
+        }
+
+        // Obtenir le texte du statut
+        function getStatusText(status) {
+            switch(status) {
+                case 'en-attente': return 'En attente';
+                case 'upcoming': return 'À venir';
+                case 'ongoing': return 'En cours';
+                case 'completed': return 'Terminé';
+                default: return status;
+            }
+        }
+
+        // Fermer le modal iframe
+        function closeModal() {
+            modal.style.display = 'none';
+            tournamentIframe.src = '';
+            tournamentIframe.style.transform = 'scale(1)';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fermer le modal participants
+        function closeParticipantsModal() {
+            participantsModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            // Afficher tous les tournois au départ
+            renderTournaments();
+            
+            // Gestion des filtres
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Retirer la classe active de tous les boutons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Ajouter la classe active au bouton cliqué
+                    button.classList.add('active');
+                    // Filtrer les tournois
+                    renderTournaments(button.getAttribute('data-filter'));
+                });
+            });
+            
+            // Fermer les modals
+            closeModalBtn.addEventListener('click', closeModal);
+            closeParticipantsBtn.addEventListener('click', closeParticipantsModal);
+            
+            // Fermer les modals quand on clique en dehors du contenu
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            participantsModal.addEventListener('click', (e) => {
+                if (e.target === participantsModal) {
+                    closeParticipantsModal();
+                }
+            });
+            
+            // Bouton d'actualisation de l'iframe
+            refreshIframeBtn.addEventListener('click', () => {
+                if (currentTournament) {
+                    iframeLoading.style.display = 'flex';
+                    tournamentIframe.style.display = 'none';
+                    tournamentIframe.src = currentTournament.iframeUrl + '?t=' + Date.now(); // Cache busting
+                }
+            });
+            
+            // Bouton pour ouvrir dans un nouvel onglet
+            openNewTabBtn.addEventListener('click', () => {
+                if (currentTournament && currentTournament.tournamentUrl) {
+                    window.open(currentTournament.tournamentUrl, '_blank', 'noopener,noreferrer');
+                }
+            });
+            
+            // Bouton pour voir les participants depuis le modal
+            viewParticipantsFromModalBtn.addEventListener('click', () => {
+                if (currentTournament) {
+                    closeModal();
+                    setTimeout(() => {
+                        openParticipantsModal(currentTournament);
+                    }, 300);
+                }
+            });
+            
+            // Fermer les modals avec la touche Échap
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (modal.style.display === 'flex') {
+                        closeModal();
+                    }
+                    if (participantsModal.style.display === 'flex') {
+                        closeParticipantsModal();
+                    }
+                }
+            });
+            
+            // Navigation au clavier dans les cartes
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                    const cards = document.querySelectorAll('.tournament-card');
+                    const currentCard = document.activeElement.closest('.tournament-card');
+                    
+                    if (currentCard) {
+                        const currentIndex = Array.from(cards).indexOf(currentCard);
+                        let nextIndex;
+                        
+                        if (e.key === 'ArrowRight') {
+                            nextIndex = (currentIndex + 1) % cards.length;
+                        } else {
+                            nextIndex = (currentIndex - 1 + cards.length) % cards.length;
+                        }
+                        
+                        cards[nextIndex].focus();
+                    }
+                }
+                
+                // Ouvrir le tournoi avec Entrée
+                if (e.key === 'Enter' && e.target.closest('.tournament-card')) {
+                    const card = e.target.closest('.tournament-card');
+                    const tournamentId = parseInt(card.getAttribute('data-id'));
+                    const tournament = tournaments.find(t => t.id === tournamentId);
+                    if (tournament) {
+                        openTournamentModal(tournament);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

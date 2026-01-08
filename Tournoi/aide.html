@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aide - Catalogue de Tournois</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #1a1a2e;
+            color: #f1f1f1;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 4px solid #e94560;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #e94560, #4cc9f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #e94560;
+            transform: translateX(-5px);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex-grow: 1;
+        }
+
+        .help-section {
+            background: rgba(34, 34, 58, 0.8);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #2a2b44;
+        }
+
+        h2 {
+            color: #4cc9f0;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: #e94560;
+            margin: 1.5rem 0 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #b8c2cc;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #b8c2cc;
+        }
+
+        .faq-item {
+            background: rgba(15, 52, 96, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #4cc9f0;
+        }
+
+        .faq-question {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-card {
+            background: rgba(15, 52, 96, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #2a2b44;
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            color: #e94560;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #0f172a;
+            color: #a9b7c6;
+            border-top: 1px solid #2a2b44;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #4cc9f0;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: #e94560;
+        }
+
+        @media (max-width: 768px) {
+            .back-btn {
+                position: relative;
+                left: 0;
+                top: 0;
+                margin-bottom: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="back-btn" onclick="window.history.back()">
+            <i class="fas fa-arrow-left"></i> Retour
+        </button>
+        <h1><i class="fas fa-question-circle"></i> Centre d'Aide</h1>
+        <p>Trouvez des réponses à vos questions fréquentes</p>
+    </header>
+
+    <div class="container">
+        <div class="help-section">
+            <h2>Comment utiliser le catalogue</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question"><i class="fas fa-search"></i> Comment naviguer dans les tournois ?</div>
+                <p>Utilisez les filtres en haut de page pour trier les tournois par type (Swiss, Élimination, etc.). Cliquez sur une carte pour voir les détails du tournoi.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question"><i class="fas fa-users"></i> Comment voir la liste des participants ?</div>
+                <p>Cliquez sur le bouton "Voir Participants" sur chaque carte de tournoi pour afficher la liste complète des participants.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question"><i class="fas fa-external-link-alt"></i> Comment accéder au site officiel du tournoi ?</div>
+                <p>Utilisez le bouton "Site du Tournoi" sur chaque carte pour ouvrir le site officiel dans un nouvel onglet.</p>
+            </div>
+        </div>
+
+        <div class="help-section">
+            <h2>Problèmes fréquents</h2>
+            
+            <h3>L'iframe ne se charge pas</h3>
+            <p>Si l'iframe ne se charge pas correctement :</p>
+            <ul>
+                <li>Vérifiez votre connexion internet</li>
+                <li>Assurez-vous que JavaScript est activé</li>
+                <li>Essayez de rafraîchir la page</li>
+                <li>Certains sites peuvent bloquer l'intégration en iframe</li>
+            </ul>
+            
+            <h3>Les participants ne s'affichent pas</h3>
+            <p>Si la liste des participants est vide :</p>
+            <ul>
+                <li>Le tournoi vient peut-être d'être créé</li>
+                <li>Les inscriptions peuvent être encore en cours</li>
+                <li>Contactez l'organisateur du tournoi</li>
+            </ul>
+        </div>
+
+        <div class="help-section">
+            <h2>Contactez-nous</h2>
+            <p>Vous ne trouvez pas la réponse à votre question ? Contactez notre équipe de support :</p>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>support@tournois-catalogue.fr</p>
+                    <p>Réponse sous 24h</p>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Téléphone</h3>
+                    <p>+33 1 23 45 67 89</p>
+                    <p>Lun-Ven, 9h-18h</p>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-comments"></i>
+                    <h3>Chat en direct</h3>
+                    <p>Disponible sur le site</p>
+                    <p>9h-20h tous les jours</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Catalogue de Tournois. Tous droits réservés.</p>
+        <div class="footer-links">
+            <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+            <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="conditions.html"><i class="fas fa-shield-alt"></i> Conditions</a>
+            <a href="politique.html"><i class="fas fa-lock"></i> Confidentialité</a>
+            <a href="apropos.html"><i class="fas fa-info-circle"></i> À propos</a>
+        </div>
+    </footer>
+
+    <script>
+        // Script simple pour les FAQ
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

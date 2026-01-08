@@ -3,43 +3,42 @@ const tournamentsData = {
     tournaments: [
         {
             id: 1,
-            title: "Swiss OpenFront Championship 2026",
-            type: "swiss",
+            title: "OpenFront Championship 2026",
+            type: "elimination",
             game: "OpenFront",
+            winner: "No",
             date: "8 Janv 2026",
             location: "Lille, France",
+            next: "Basile | Gaspard",
             participants: 8,
             status: "en-attente",
             iframeUrl: "https://challonge.com/fr/4tnu9k5t/module",
             tournamentUrl: "https://challonge.com/fr/4tnu9k5t",
             participantsList: [
-                { id: 1, name: "Victor", rank: "Participant", country: "🇫🇷", score: "0 pts" },
-                { id: 2, name: "Gaspard", rank: "Participant", country: "🇫🇷", score: "0 pts" },
-                { id: 3, name: "Roméo", rank: "Participant", country: "🇫🇷", score: "0 pts" },
-                { id: 4, name: "Kylian", rank: "Participant", country: "🇫🇷", score: "0 pts" },
-                { id: 5, name: "Basile", rank: "Participant", country: "🇫🇷", score: "0 pts" },
-                { id: 6, name: "Esteban", rank: "Participant", country: "🇩🇪", score: "0 pts" }
+                { id: "#", name: "Victor", rank: "Participant", country: "", score: "0 pts" },
+                { id: "#", name: "Gaspard", rank: "Participant", country: "", score: "0 pts" },
+                { id: 1, name: "Roméo", rank: "Alpha", country: "🇦🇱", score: "🇦🇱 0 pts" },
+                { id: "#", name: "Kylian", rank: "Participant", country: "", score: "0 pts" },
+                { id: "#", name: "Basile", rank: "Participant", country: "", score: "0 pts" },
+                { id: "#", name: "Esteban", rank: "Participant", country: "", score: "0 pts" }
             ],
-            description: "Tournoi OpenFront officiel 2026. Format suisse avec 8 participants. Les matchs se dérouleront en ligne avec diffusion en direct."
+            description: "Tournoi OpenFront officiel 2026. Format simple élimination avec 8 participants en équipe de 2. Les matchs se dérouleront en ligne avec diffusion en direct."
         },
         {
             id: 2,
-            title: "World Gaming Masters 2026",
+            title: "Chess Tour 2026",
             type: "elimination",
-            game: "Valorant",
+            game: "Echecs",
+            winner: "No",
             date: "15 Fév 2026",
-            location: "Paris, France",
-            participants: 16,
+            location: "Lille, France",
+            next: "attente",
+            participants: "?",
             status: "upcoming",
             iframeUrl: "https://challonge.com/fr/example1/module",
             tournamentUrl: "https://challonge.com/fr/example1",
-            participantsList: [
-                { id: 1, name: "Team Alpha", rank: "1ère place", country: "🇫🇷", score: "2500 pts" },
-                { id: 2, name: "Team Beta", rank: "2ème place", country: "🇩🇪", score: "2300 pts" },
-                { id: 3, name: "Team Gamma", rank: "3ème place", country: "🇺🇸", score: "2100 pts" },
-                { id: 4, name: "Team Delta", rank: "Participant", country: "🇬🇧", score: "1900 pts" }
-            ],
-            description: "Championnat du monde de Valorant 2026. Format élimination directe avec 16 équipes internationales."
+            participantsList: [],
+            description: "Championnat du C R-B d'Echecs 2026. Format élimination directe avec 2 équipes."
         }
     ],
     
